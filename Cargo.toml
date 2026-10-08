@@ -1,0 +1,15 @@
+[package]
+name = "nameXtraktor"
+version = "0.0.1"
+edition = "2024"
+authors = ["hurukan"]
+
+[dependencies]
+rustc_version_runtime = "0.3.0"
+text-colorizer = "1.0.0"
+clear_screen = "0.1.0"
+regex = "1.13.1"
+
+[[bin]]
+name = "nameXtraktor"
+path = "src/nameXtraktor.rs"
