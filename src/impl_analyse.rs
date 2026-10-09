@@ -7,7 +7,7 @@ use std::process::{Command, ExitStatus};
 use text_colorizer::Colorize;
 use crate::patterns::{END_OF_SLICE, REGEX_CHARACTERTYPE, START_OF_SLICE};
 
-pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
+pub fn analyse(path :String, lespersos :&mut  Vec<String>)
 {
 	// j'avais complètement oublié le fichier .duf est un fichier zippé :{
 

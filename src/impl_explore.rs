@@ -4,7 +4,7 @@
 
 use std::fs::{read_dir};
 
-pub fn vasy_explore(root :String, vecteur :&mut Vec<String>)
+pub fn explore(root :String, vecteur :&mut Vec<String>)
 {
 	let res_open = read_dir(root.clone());
 
@@ -30,7 +30,7 @@ pub fn vasy_explore(root :String, vecteur :&mut Vec<String>)
 			let binding = uneentree.unwrap();
 			if binding.file_type().unwrap().is_dir()
 			{
-				vasy_explore(binding.path().into_string().unwrap(), vecteur);
+				explore(binding.path().into_string().unwrap(), vecteur);
 			}
 			if binding.file_type().unwrap().is_file()
 			{

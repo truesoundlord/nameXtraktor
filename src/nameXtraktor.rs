@@ -4,10 +4,10 @@
 
 mod constants;
 mod patterns;
-mod impl_vasyexplore;
-mod impl_vasyanalyse;
+mod impl_explore;
+mod impl_analyse;
 
-use crate::impl_vasyanalyse::vasy_analyse;
+use crate::impl_analyse::analyse;
 use std::{env};
 use std::process::exit;
 
@@ -15,7 +15,7 @@ use clear_screen::clear;
 use text_colorizer::{Colorize};
 
 use crate::constants::{AUTHOR, NAME, VERSION, YEARS};
-use crate::impl_vasyexplore::vasy_explore;
+use crate::impl_explore::explore;
 
 fn main()
 {
@@ -45,14 +45,14 @@ fn main()
 
 	println!("Target is {}",RootPath);
 
-	vasy_explore(RootPath, &mut vecElements);
+	explore(RootPath, &mut vecElements);
 
 	println!("Nombre de fichiers à traiter: {}",vecElements.len());
 
 	for lesfichiersaouvrir in vecElements
 	{
 		println!("Ouverture de {}",lesfichiersaouvrir.italic().bold().truecolor(0x71,0x9a,0x9c));
-		vasy_analyse(lesfichiersaouvrir,&mut vecNomsPersos);
+		analyse(lesfichiersaouvrir, &mut vecNomsPersos);
 		println!("Nombre de personnages: {}",vecNomsPersos.len());
 		for lesnoms in &vecNomsPersos
 		{
