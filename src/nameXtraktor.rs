@@ -51,7 +51,7 @@ fn main()
 
 	for lesfichiersaouvrir in vecElements
 	{
-		println!("Ouverture de {}",lesfichiersaouvrir);
+		println!("Ouverture de {}",lesfichiersaouvrir.italic().bold().truecolor(0x71,0x9a,0x9c));
 		vasy_analyse(lesfichiersaouvrir,&mut vecNomsPersos);
 		println!("Nombre de personnages: {}",vecNomsPersos.len());
 		for lesnoms in &vecNomsPersos

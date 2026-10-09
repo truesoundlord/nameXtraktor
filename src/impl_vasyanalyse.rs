@@ -4,6 +4,7 @@
 
 use std::{fs};
 use std::process::{Command, ExitStatus};
+use text_colorizer::Colorize;
 use crate::patterns::{END_OF_SLICE, REGEX_CHARACTERTYPE, START_OF_SLICE};
 
 pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
@@ -14,8 +15,6 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 	let mut contenu;
 	let mut position = None;
 	let mut modifiedfilename = "".to_string();
-
-	println!("[--START--] {}",path);
 
 	if cfg!(unix)
 	{
@@ -33,13 +32,15 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 		let (caca,_) = path.split_at(position.unwrap());
 		tmpdir = caca.to_string();
 
+		// println!("[DEBUG A.] tmpdir {}",tmpdir);
+
 		if cfg!(unix)
 		{
 			tmpdir += "/tmp";
 		}
 		if cfg!(windows)
 		{
-			tmpdir += "\\tmp\\";				// rar needs trailing backslash...
+			tmpdir += "\\tmp\\";																																					// rar needs trailing backslash...
 		}
 	}
 	else
@@ -48,7 +49,7 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 	}
 
 	let _ = fs::create_dir(&tmpdir);
-	let mut status :Result<ExitStatus,String> = Result::Err("MERDE".to_string());
+	let mut status :Result<ExitStatus,String> = Err("MERDE".to_string());
 	
 	if cfg!(unix)
 	{
@@ -61,7 +62,7 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 
 	if status.unwrap().success()
 	{
-		println!("Fichier décompressé dans {}",tmpdir);
+		println!("Fichier décompressé dans {}",tmpdir.bold().truecolor(0xb8,0xfb,0xff));
 
 		if cfg!(unix)
 		{
@@ -76,14 +77,14 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 		{
 			// le path ne contient pas un absolute path mais peut-être un nom de fichier simple
 			modifiedfilename = path.to_string().replace(".duf", "");
-			println!("[A. DEBUG] {}",modifiedfilename);
+			// println!("[B. DEBUG] {}",modifiedfilename);
 		}
 		else
 		{
 			let (_,tmp) = path.split_at(position.unwrap());
 			if cfg!(unix)
 			{
-				modifiedfilename = tmp.to_string().replace("/", "").replace(".duf", "");
+				modifiedfilename = tmp.to_string().replace("/", "").replace(".duf","");
 			}
 			if cfg!(windows)
 			{
@@ -92,6 +93,8 @@ pub fn vasy_analyse(path :String, lespersos :&mut  Vec<String>)
 		}
 
 		let mut pathcomplet = "".to_string();
+
+		// println!("[C. DEBUG] {}",modifiedfilename);
 
 		if cfg!(unix)
 		{

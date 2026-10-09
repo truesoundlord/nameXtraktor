@@ -2,7 +2,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
-use std::env;
 use std::fs::{read_dir};
 
 pub fn vasy_explore(root :String, vecteur :&mut Vec<String>)
@@ -14,8 +13,11 @@ pub fn vasy_explore(root :String, vecteur :&mut Vec<String>)
 		// Pas un répertoire donc il s'agit d'un fichier...
 		if root.ends_with(".duf")
 		{
-			let current = env::current_dir().unwrap();
-			let filename = format!("{}/{}",current.to_string_lossy(),root);
+			// let current = env::current_dir().unwrap();
+			let filename = format!("{}",root);
+
+			// println!("[DEBUG -- explore] {}",filename);
+
 			vecteur.push(filename);
 		}
 		return;
